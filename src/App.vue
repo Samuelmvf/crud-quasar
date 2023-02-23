@@ -5,6 +5,8 @@
 </template>
 
 <script>
+import '../server.js'
+
 export default {
   name: 'App'
 }
