@@ -2,8 +2,7 @@
   <q-item
     clickable
     tag="a"
-    target="_blank"
-    :href="link"
+    @click="$event => goTo()"
   >
     <q-item-section
       v-if="icon"
@@ -14,9 +13,6 @@
 
     <q-item-section>
       <q-item-label>{{ title }}</q-item-label>
-      <q-item-label caption>
-        {{ caption }}
-      </q-item-label>
     </q-item-section>
   </q-item>
 </template>
@@ -29,20 +25,18 @@ export default {
       type: String,
       required: true
     },
-
-    caption: {
+    path: {
       type: String,
-      default: ''
+      required: true
     },
-
-    link: {
-      type: String,
-      default: '#'
-    },
-
     icon: {
       type: String,
       default: ''
+    }
+  },
+  methods: {
+    goTo () {
+      this.$router.push(this.path)
     }
   }
 }

@@ -6,7 +6,7 @@
           <div class="img-container q-my-sm">
             <q-img src="https://datastone.com.br/wp-content/uploads/2018/03/data-stone.png"></q-img>
           </div>
-          <div class="flex items-center">
+          <div v-if="$q.screen.lt.md" class="flex items-center">
             <q-btn
               color="primary"
               flat
@@ -16,6 +16,23 @@
               aria-label="Menu"
               @click="showMenuLateralDireito = !showMenuLateralDireito"
             />
+          </div>
+          <div v-else class="flex items-center">
+            <q-btn v-for="bloco in blocosMenu" :key="bloco.titulo" flat color="primary" :label="bloco.titulo" class="text-bold">
+              <q-menu>
+                <q-list class="bg-accent text-white" style="min-width: 100px">
+                  <div
+                    v-for="acao in bloco.acoes"
+                    :key="acao.nome"
+                  >
+                    <item-menu
+                      :title="acao.nome" :icon="acao.icon" :path="acao.path"
+                    />
+                    <q-separator v-if="acao != bloco.acoes.at(-1)" color="white" />
+                  </div>
+                </q-list>
+              </q-menu>
+            </q-btn>
           </div>
         </div>
       </q-toolbar>
@@ -34,13 +51,11 @@
           v-for="bloco in blocosMenu"
           :key="bloco.titulo"
           expand-separator
-          :icon="bloco.icon"
           :label="bloco.titulo"
         >
           <item-menu
-            v-for="link in essentialLinks"
-            :key="link.title"
-            v-bind="link"
+            v-for="acao in bloco.acoes"
+            :key="acao.nome" :title="acao.nome" :icon="acao.icon" :path="acao.path"
           />
         </q-expansion-item>
       </q-list>
@@ -58,29 +73,31 @@ import ItemMenu from 'src/components/ItemMenu.vue'
 const blocosMenu = [
   {
     titulo: 'Gestão de clientes',
-    icon: 'mdi-account',
     acoes: [
       {
         nome: 'Criar cliente',
-        icon: 'mdi-account-plus'
+        icon: 'mdi-account-plus',
+        path: 'cliente/criar'
       },
       {
         nome: 'Listar clientes',
-        icon: 'mdi-text-box-outline'
+        icon: 'mdi-text-box-outline',
+        path: 'cliente'
       }
     ]
   },
   {
     titulo: 'Gestão de produtos',
-    icon: 'mdi-package-variant-closed',
     acoes: [
       {
         nome: 'Criar produto',
-        icon: 'mdi-package-variant-closed-plus'
+        icon: 'mdi-archive',
+        path: 'produto/criar'
       },
       {
         nome: 'Listar produtos',
-        icon: 'mdi-text-box-outline'
+        icon: 'mdi-text-box-outline',
+        path: 'produto'
       }
     ]
   }
@@ -96,6 +113,11 @@ export default {
       showMenuLateralDireito: false,
       blocosMenu: blocosMenu
     }
+  },
+  mounted () {
+    this.$nextTick(() => {
+      this.showMenuLateralDireito = false
+    })
   }
 }
 </script>
@@ -104,6 +126,9 @@ export default {
 .img-container
   width: 284px
   height: 48px
+  
+  @media (max-width: 350px)
+    width: 214px
+    height: 36px
 
- 
 </style>
