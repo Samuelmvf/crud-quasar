@@ -2,30 +2,12 @@
 
 Projeto para demonstrar habilidades em Vue.JS utilizando o Quasar Framework.
 
-## Install the dependencies
+## Instalar dependências
 ```bash
-yarn
-# or
 npm install
 ```
 
-### Start the app in development mode (hot-code reloading, error reporting, etc.)
+### Iniciar aplicação em modo de desenvolvimento
 ```bash
-quasar dev
+npm run dev
 ```
-
-
-### Lint the files
-```bash
-yarn lint
-# or
-npm run lint
-```
-
-### Build the app for production
-```bash
-quasar build
-```
-
-### Customize the configuration
-See [Configuring quasar.conf.js](https://v1.quasar.dev/quasar-cli/quasar-conf-js).
