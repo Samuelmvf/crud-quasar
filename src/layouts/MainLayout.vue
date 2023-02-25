@@ -77,12 +77,12 @@ const blocosMenu = [
       {
         nome: 'Criar cliente',
         icon: 'mdi-account-plus',
-        path: 'cliente/criar'
+        path: '/cliente/criar'
       },
       {
         nome: 'Listar clientes',
         icon: 'mdi-text-box-outline',
-        path: 'cliente'
+        path: '/cliente'
       }
     ]
   },
@@ -92,12 +92,12 @@ const blocosMenu = [
       {
         nome: 'Criar produto',
         icon: 'mdi-archive',
-        path: 'produto/criar'
+        path: '/produto/criar'
       },
       {
         nome: 'Listar produtos',
         icon: 'mdi-text-box-outline',
-        path: 'produto'
+        path: '/produto'
       }
     ]
   }
