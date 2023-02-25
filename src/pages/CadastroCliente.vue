@@ -36,8 +36,8 @@
             left-label
           />
         </div>
-        <q-separator inset/>
-        <div class="row q-ma-md">
+        <q-separator/>
+        <div class="row q-my-md">
           <q-btn color="primary" label="Cadastrar" type="submit"/>
           <q-btn color="red" flat label="Cancelar" class="q-ml-sm" @click="actionCancelar"/>
         </div>
@@ -48,6 +48,7 @@
 
 <script>
 import { validarEmail } from 'src/utilities/Utils'
+import clienteService from 'src/services/ClienteService'
 
 export default {
   name: 'CadastroCliente',
@@ -69,8 +70,26 @@ export default {
   },
   methods: {
     actionCadastrar () {
+      this.$q.loading.show()
+      clienteService.criar(this.cliente)
+        .then(() => {
+          this.$q.loading.hide()
+          this.$q.notify({
+            type: 'positive',
+            message: 'Cliente cadastrado com sucesso.'
+          })
+          this.$router.push('/cliente')
+        })
+        .catch(() => {
+          this.$q.loading.hide()
+          this.$q.notify({
+            type: 'negative',
+            message: 'Falha ao cadastrar cliente. Tente novamente mais tarde.'
+          })
+        })
     },
     actionCancelar () {
+      this.$router.push('/')
     },
     validarEmail
   }

@@ -111,7 +111,7 @@ export default {
   data () {
     return {
       showMenuLateralDireito: false,
-      blocosMenu: blocosMenu
+      blocosMenu
     }
   },
   mounted () {

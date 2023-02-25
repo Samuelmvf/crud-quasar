@@ -19,14 +19,15 @@ createServer({
           documento: '13199879667',
           telefone: '3134869927',
           email: 'samuelmvf@gmail.com',
-          ativo: 1
+          ativo: true,
+          produtos: []
         }
       ],
       produtos: [
         {
           id: "1",
           nome: "SAMSUNG Monitor Gamer Odyssey 24' FHD, 165Hz, 1ms",
-          ativo: 1
+          ativo: true
         }
       ]
     })
@@ -41,8 +42,11 @@ createServer({
     }, { timing: TIMEOUT_GET_MS});
 
     this.post('/clientes', (schema, request) => {
-      const requestBody = JSON.parse(request.requestBody)
-      const { cliente } = requestBody
+      const cliente = JSON.parse(request.requestBody)
+
+      if (!cliente.hasOwnProperty('produtos')) {
+        cliente.produtos = []
+      }
       return schema.create('cliente', cliente);
     }, { timing: TIMEOUT_POST_PUT_MS})
 
@@ -59,8 +63,7 @@ createServer({
     }, { timing: TIMEOUT_GET_MS});
     
     this.post('/produtos', (schema, request) => {
-      const requestBody = JSON.parse(request.requestBody)
-      const { produto } = requestBody
+      const produto = JSON.parse(request.requestBody)
       return schema.create('produto', produto);
     }, { timing: TIMEOUT_POST_PUT_MS});
     
