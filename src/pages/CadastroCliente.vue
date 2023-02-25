@@ -1,10 +1,10 @@
 <template>
   <q-page class="flex flex-center bg-secondary">
     <q-card class="q-ma-lg bg-white text-center" style="width: 600px">
-      <h3 class="text-primary q-my-md non-selectable">Cadastro de cliente</h3>
+      <h3 class="text-primary q-my-md non-selectable">{{ isCadastroCliente ? 'Cadastro de cliente' : 'Editar cliente' }}</h3>
       <q-separator/>
       <q-form
-        @submit="actionCadastrar"
+        @submit="actionSalvar"
       >
         <div class="row q-col-gutter-sm q-pa-md">
           <q-input
@@ -57,9 +57,11 @@ import clienteService from 'src/services/ClienteService'
 
 export default {
   name: 'CadastroCliente',
+
   data () {
     return {
       cliente: {
+        id: undefined,
         nome: undefined,
         documento: undefined,
         telefone: '',
@@ -68,13 +70,66 @@ export default {
       }
     }
   },
+
   computed: {
+    isCadastroCliente () {
+      return !this.cliente.id
+    },
     maskClienteTelefone () {
       return (!!this.cliente.telefone && this.cliente.telefone.length > 10) ? '(##) #####-####' : '(##) ####-#####'
     }
   },
+
   methods: {
-    actionCadastrar () {
+    actionCancelar () {
+      this.$router.push('/')
+    },
+
+    actionSalvar () {
+      if (this.isCadastroCliente) {
+        this.cadastrarCliente()
+      } else {
+        this.atualizarCliente()
+      }
+    },
+
+    atualizarCliente () {
+      this.$q.loading.show()
+      clienteService.atualizar(this.cliente)
+        .then(() => {
+          this.$q.loading.hide()
+          this.$q.notify({
+            type: 'positive',
+            message: 'Cliente atualizado com sucesso.'
+          })
+          this.$router.push('/cliente')
+        })
+        .catch(() => {
+          this.$q.loading.hide()
+          this.$q.notify({
+            type: 'negative',
+            message: 'Falha ao atualizar cliente. Tente novamente mais tarde.'
+          })
+        })
+    },
+
+    buscarClientePorId (id) {
+      this.$q.loading.show()
+      clienteService.buscarPorId(id)
+        .then(response => {
+          this.$q.loading.hide()
+          this.cliente = response.data.cliente
+        })
+        .catch(() => {
+          this.$q.loading.hide()
+          this.$q.notify({
+            type: 'negative',
+            message: 'Falha ao buscar cliente. Tente novamente mais tarde.'
+          })
+        })
+    },
+
+    cadastrarCliente () {
       this.$q.loading.show()
       clienteService.criar(this.cliente)
         .then(() => {
@@ -93,10 +148,31 @@ export default {
           })
         })
     },
-    actionCancelar () {
-      this.$router.push('/')
+
+    limparCampos () {
+      this.cliente = {
+        id: undefined,
+        nome: undefined,
+        documento: undefined,
+        telefone: '',
+        email: undefined,
+        ativo: false
+      }
     },
-    validarEmail
+
+    validarEmail,
+
+    validaFluxoAtualizacaoCliente () {
+      if (!!this.$route.params.id) {
+        this.buscarClientePorId(this.$route.params.id)
+      } else {
+        this.limparCampos()
+      }
+    }
+  },
+
+  mounted () {
+    this.validaFluxoAtualizacaoCliente()
   }
 }
 </script>

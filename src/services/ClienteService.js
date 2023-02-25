@@ -10,6 +10,10 @@ const atualizar = (cliente) => {
   return api.put(`${BASE_PATH}/${cliente.id}`, cliente)
 }
 
+const buscarPorId = (id) => {
+  return api.get(`${BASE_PATH}/${id}`)
+}
+
 const buscarTodos = () => {
   return api.get(BASE_PATH)
 }
@@ -17,5 +21,6 @@ const buscarTodos = () => {
 export default {
   criar,
   atualizar,
+  buscarPorId,
   buscarTodos
 }

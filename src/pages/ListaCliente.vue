@@ -11,7 +11,9 @@
                 {{ cliente.nome }} | Documento: {{ cliente.documento }}
               </span>
               <div class="q-gutter-sm">
-                <q-btn dense round flat color="yellow-8" icon="mdi-pencil-outline">
+                <q-btn dense round flat color="yellow-8" icon="mdi-pencil-outline"
+                  @click="actionEditar(cliente.id)"
+                >
                   <q-tooltip>
                     <span class="text-body2">Editar cliente</span>
                   </q-tooltip>
@@ -45,6 +47,9 @@ export default {
     }
   },
   methods: {
+    actionEditar (idCliente) {
+      this.$router.push(`/cliente/${idCliente}`)
+    },
     actionSair () {
       this.$router.push('/')
     },

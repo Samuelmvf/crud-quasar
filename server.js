@@ -41,6 +41,11 @@ createServer({
       return this.schema.all('cliente')
     }, { timing: TIMEOUT_GET_MS});
 
+    this.get("/clientes/:id", (schema, request) => {
+      const id = request.params.id
+      return schema.find('cliente', id)
+    })
+
     this.post('/clientes', (schema, request) => {
       const cliente = JSON.parse(request.requestBody)
 
@@ -50,24 +55,30 @@ createServer({
       return schema.create('cliente', cliente);
     }, { timing: TIMEOUT_POST_PUT_MS})
 
-    this.put('/clientes:id', (schema, request) => {
+    this.put('/clientes/:id', (schema, request) => {
       const requestBody = JSON.parse(request.requestBody)
       const id = request.params.id
       const cliente = schema.find('cliente', id)
       return cliente.update(requestBody)
     }, { timing: TIMEOUT_POST_PUT_MS})
 
+
     // PRODUTOS
     this.get('/produtos', () => {
       return this.schema.all('produto')
-    }, { timing: TIMEOUT_GET_MS});
+    }, { timing: TIMEOUT_GET_MS})
+
+    this.get("/produtos/:id", (schema, request) => {
+      const id = request.params.id
+      return schema.find('produto', id)
+    })
     
     this.post('/produtos', (schema, request) => {
       const produto = JSON.parse(request.requestBody)
       return schema.create('produto', produto);
-    }, { timing: TIMEOUT_POST_PUT_MS});
+    }, { timing: TIMEOUT_POST_PUT_MS})
     
-    this.put('/produtos:id', (schema, request) => {
+    this.put('/produtos/:id', (schema, request) => {
       const requestBody = JSON.parse(request.requestBody)
       const id = request.params.id
       const produto = schema.find('produto', id)
