@@ -11,7 +11,12 @@
                 {{ cliente.nome }} | Documento: {{ cliente.documento }}
               </span>
               <div class="q-gutter-sm">
-                <q-btn dense round flat color="yellow-8" icon="mdi-archive">
+                <q-btn dense round flat color="yellow-8" icon="mdi-pencil-outline">
+                  <q-tooltip>
+                    <span class="text-body2">Editar cliente</span>
+                  </q-tooltip>
+                </q-btn>
+                <q-btn dense round flat color="green-8" icon="mdi-archive">
                   <q-tooltip>
                     <span class="text-body2">Associar e visualizar produtos</span>
                   </q-tooltip>
