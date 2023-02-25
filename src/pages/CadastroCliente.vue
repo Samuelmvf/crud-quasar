@@ -73,7 +73,7 @@ export default {
 
   computed: {
     isCadastroCliente () {
-      return !this.cliente.id
+      return !this.$route.params.id
     },
     maskClienteTelefone () {
       return (!!this.cliente.telefone && this.cliente.telefone.length > 10) ? '(##) #####-####' : '(##) ####-#####'
@@ -171,8 +171,13 @@ export default {
     }
   },
 
-  mounted () {
-    this.validaFluxoAtualizacaoCliente()
+  watch: {
+    isCadastroCliente: {
+      immediate: true,
+      handler () {
+        this.validaFluxoAtualizacaoCliente()
+      }
+    }
   }
 }
 </script>

@@ -11,7 +11,9 @@
                 {{ produto.nome }}
               </span>
               <div>
-                <q-btn dense round flat color="yellow-8" icon="mdi-pencil-outline">
+                <q-btn dense round flat color="yellow-8" icon="mdi-pencil-outline"
+                  @click="actionEditar(produto.id)"
+                >
                   <q-tooltip>
                     <span class="text-body2">Editar produto</span>
                   </q-tooltip>
@@ -40,9 +42,14 @@ export default {
     }
   },
   methods: {
+    actionEditar (idProduto) {
+      this.$router.push(`/produto/${idProduto}`)
+    },
+
     actionSair () {
       this.$router.push('/')
     },
+
     buscarProdutos () {
       this.$q.loading.show()
       produtoService.buscarTodos()

@@ -8,7 +8,7 @@
           <q-item v-for="cliente in clientes" :key="cliente.id">
             <div class="row full-width justify-between items-center">
               <span class="text-body2">
-                {{ cliente.nome }} | Documento: {{ cliente.documento }}
+                {{ cliente.nome }}
               </span>
               <div class="q-gutter-sm">
                 <q-btn dense round flat color="yellow-8" icon="mdi-pencil-outline"
