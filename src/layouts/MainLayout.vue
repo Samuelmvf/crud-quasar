@@ -3,7 +3,7 @@
     <q-header elevated class="primary-gradient">
       <q-toolbar>
         <div class="row full-width justify-between">
-          <div class="img-container q-my-sm">
+          <div class="img-container q-my-sm cursor-pointer" @click="voltarParaPaginaPrincipal">
             <q-img src="https://datastone.com.br/wp-content/uploads/2018/03/data-stone.png"></q-img>
           </div>
           <div v-if="$q.screen.lt.md" class="flex items-center">
@@ -118,6 +118,11 @@ export default {
     this.$nextTick(() => {
       this.showMenuLateralDireito = false
     })
+  },
+  methods: {
+    voltarParaPaginaPrincipal () {
+      this.$router.push('/')
+    }
   }
 }
 </script>

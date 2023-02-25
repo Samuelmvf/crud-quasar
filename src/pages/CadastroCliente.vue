@@ -1,23 +1,26 @@
 <template>
   <q-page class="flex flex-center bg-secondary">
-    <q-card class="q-ma-lg bg-white text-center" style="width: 600px;">
+    <q-card class="q-ma-lg bg-white text-center" style="width: 600px">
       <h3 class="text-primary q-my-md non-selectable">Cadastro de cliente</h3>
-      <q-separator inset/>
-      <q-form class="q-ma-md"
+      <q-separator/>
+      <q-form
         @submit="actionCadastrar"
       >
-        <div class="row q-col-gutter-sm">
+        <div class="row q-col-gutter-sm q-pa-md">
           <q-input
+            dense
             class="col-xs-12 col-sm-12 col-md-6" outlined 
             v-model="cliente.nome" label="Nome*"
             :rules="[val => !!val && val.length > 1 || 'Preencha o nome corretamente']"
             lazy-rules/>
           <q-input
+            dense
             class="col-xs-12 col-sm-12 col-md-6" outlined
             v-model="cliente.documento" label="Documento*"
             :rules="[val => !!val || 'Preencha o documento corretamente']"
             lazy-rules/>
           <q-input
+            dense
             class="col-xs-12 col-sm-12 col-md-6" outlined
             v-model="cliente.telefone" label="Telefone*"
             :mask="maskClienteTelefone"
@@ -25,11 +28,13 @@
             :rules="[val => !!val && val.length >= 10 || 'Preencha o telefone corretamente']"
             lazy-rules/>
           <q-input
+            dense
             class="col-xs-12 col-sm-12 col-md-6" outlined
             v-model="cliente.email" label="Email*"
             :rules="[val => validarEmail(val) || 'Preencha o campo email corretamente']"
             lazy-rules/>
           <q-toggle
+            dense
             v-model="cliente.ativo"
             color="green"
             label="Ativo"
@@ -37,7 +42,7 @@
           />
         </div>
         <q-separator/>
-        <div class="row q-my-md">
+        <div class="row q-pa-md">
           <q-btn color="primary" label="Cadastrar" type="submit"/>
           <q-btn color="red" flat label="Cancelar" class="q-ml-sm" @click="actionCancelar"/>
         </div>
