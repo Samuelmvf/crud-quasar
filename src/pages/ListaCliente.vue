@@ -43,11 +43,13 @@ import clienteService from 'src/services/ClienteService'
 
 export default {
   name: 'ListaCliente',
+
   data () {
     return {
       clientes: []
     }
   },
+
   methods: {
     actionEditar (idCliente) {
       this.$router.push(`/cliente/${idCliente}`)
@@ -88,6 +90,7 @@ export default {
         })
     }
   },
+
   mounted () {
     this.buscarClientes()
   }

@@ -82,6 +82,7 @@ export default {
     nomeClienteTratado () {
       return this.cliente.nome.split(' ').slice(0, 2).join(' ')
     },
+
     produtosTratados () {
       return this.produtos.filter(produto => produto.ativo
         && !this.cliente.produtos.find(produtoCliente => produtoCliente.id === produto.id)
@@ -140,7 +141,6 @@ export default {
 
     salvarCliente (cliente) {
       this.$q.loading.show()
-
       clienteService.atualizar(cliente)
         .then(() => {
           this.$q.loading.hide()
@@ -148,8 +148,8 @@ export default {
             type: 'positive',
             message: 'Produtos associados ao cliente com sucesso.'
           })
+
           this.limparCampos()
-          
           this.cliente.produtos = cliente.produtos
         })
         .catch(() => {

@@ -36,11 +36,13 @@ import produtoService from 'src/services/ProdutoService'
 
 export default {
   name: 'ListaProduto',
+
   data () {
     return {
       produtos: []
     }
   },
+
   methods: {
     actionEditar (idProduto) {
       this.$router.push(`/produto/${idProduto}`)
@@ -66,6 +68,7 @@ export default {
         })
     }
   },
+
   mounted () {
     this.buscarProdutos()
   }
