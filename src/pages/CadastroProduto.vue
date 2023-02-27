@@ -23,7 +23,7 @@
         </div>
         <q-separator/>
         <div class="row q-pa-md">
-          <q-btn color="primary" label="Cadastrar" type="submit"/>
+          <q-btn color="primary" :label="isCadastroProduto ? 'Cadastrar' : 'Editar'" type="submit"/>
           <q-btn color="red" flat label="Cancelar" class="q-ml-sm" @click="actionCancelar"/>
         </div>
       </q-form>
