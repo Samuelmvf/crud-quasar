@@ -7,6 +7,7 @@ O projeto também tem como objetivo principal demonstrar meus conhecimentos util
 TODO:
 - Exclusão de clientes e produtos
 - Dicionário I18N
+- Testes unitários
 ```
 
 ## Instalar dependências
