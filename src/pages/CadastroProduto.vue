@@ -1,7 +1,7 @@
 <template>
   <q-page class="flex flex-center bg-secondary">
     <q-card class="q-ma-lg bg-white text-center" style="width: 600px">
-      <h3 class="text-primary q-my-md non-selectable">{{ isCadastroProduto ? 'Cadastro de produto' : 'Editar produto' }}</h3>
+      <h3 class="text-primary q-my-md non-selectable">{{ isCadastroProduto ? 'CADASTRO DE PRODUTO' : 'EDITAR PRODUTO' }}</h3>
       <q-separator/>
       <q-form
         @submit="actionSalvar"

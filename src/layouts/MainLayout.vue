@@ -64,11 +64,14 @@
     <q-page-container>
       <router-view />
     </q-page-container>
+
+    <modal-associacao-produto-cliente ref="refModalAssociacaoProdutoCliente"></modal-associacao-produto-cliente>
   </q-layout>
 </template>
 
 <script>
 import ItemMenu from 'src/components/ItemMenu.vue'
+import ModalAssociacaoProdutoCliente from 'src/components/modal/ModalAssociacaoProdutoCliente.vue'
 
 const blocosMenu = [
   {
@@ -106,7 +109,8 @@ const blocosMenu = [
 export default {
   name: 'MainLayout',
   components: {
-    ItemMenu
+    ItemMenu,
+    ModalAssociacaoProdutoCliente
   },
   data () {
     return {
@@ -115,11 +119,18 @@ export default {
     }
   },
   mounted () {
+    this.referenciarModais()
+
     this.$nextTick(() => {
       this.showMenuLateralDireito = false
     })
   },
   methods: {
+    referenciarModais () {
+      this.$root.modal = {}
+      this.$root.modal.associacaoProdutoCliente = this.$refs.refModalAssociacaoProdutoCliente
+    },
+
     voltarParaPaginaPrincipal () {
       this.$router.push('/')
     }

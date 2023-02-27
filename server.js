@@ -26,9 +26,19 @@ createServer({
       produtos: [
         {
           id: "1",
-          nome: "SAMSUNG Monitor Gamer Odyssey 24' FHD, 165Hz, 1ms",
+          nome: "Sistema de gestão de trafego pago",
           ativo: true
-        }
+        },
+        {
+          id: "2",
+          nome: "AWS Services",
+          ativo: true
+        },
+        {
+          id: "3",
+          nome: "DataStone Masters",
+          ativo: true
+        },
       ]
     })
   },

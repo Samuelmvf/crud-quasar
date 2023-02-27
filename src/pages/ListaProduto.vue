@@ -1,7 +1,7 @@
 <template>
   <q-page class="flex flex-center bg-secondary">
     <q-card class="q-ma-lg bg-white text-center box-size">
-      <h3 class="text-primary q-my-md non-selectable">Produtos</h3>
+      <h3 class="text-primary q-my-md non-selectable">PRODUTOS</h3>
       <q-separator/>
       <q-scroll-area style="height: calc(55vh - 150px)" class="q-py-sm q-mx-md">
         <q-list separator>
@@ -25,7 +25,7 @@
       </q-scroll-area>
       <q-separator/>
       <div style="height: 68px">
-        <q-btn color="red" flat label="Sair" class="q-my-md" @click="actionSair"/>
+        <q-btn color="red" flat label="Fechar" class="q-my-md" @click="actionFechar"/>
       </div>
     </q-card>
   </q-page>
@@ -46,7 +46,7 @@ export default {
       this.$router.push(`/produto/${idProduto}`)
     },
 
-    actionSair () {
+    actionFechar () {
       this.$router.push('/')
     },
 
@@ -71,9 +71,3 @@ export default {
   }
 }
 </script>
-<style scoped lang="sass">
-.box-size
-  width: 600px
-  height: 55vh
-
-</style>
