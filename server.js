@@ -21,24 +21,23 @@ createServer({
           email: 'samuelmvf@gmail.com',
           ativo: true,
           produtos: []
+        },
+        {
+          id: "2",
+          nome: 'Ana Beatriz',
+          documento: '999999',
+          telefone: '31999998888',
+          email: 'anabeatriz@hotmail.com',
+          ativo: true,
+          produtos: []
         }
       ],
       produtos: [
         {
           id: "1",
-          nome: "Sistema de gestão de trafego pago",
+          nome: "Stone station - Plataforma online",
           ativo: true
-        },
-        {
-          id: "2",
-          nome: "AWS Services",
-          ativo: true
-        },
-        {
-          id: "3",
-          nome: "DataStone Masters",
-          ativo: true
-        },
+        }
       ]
     })
   },

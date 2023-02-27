@@ -52,9 +52,16 @@ export default {
     actionEditar (idCliente) {
       this.$router.push(`/cliente/${idCliente}`)
     },
+
     actionFechar () {
       this.$router.push('/')
     },
+
+    atualizarClienteListado (clienteAtualizado) {
+      const clienteDesatualizado = this.clientes.find(cliente => cliente.id === clienteAtualizado.id)
+      clienteDesatualizado.produtos = clienteAtualizado.produtos
+    },
+
     buscarClientes () {
       this.$q.loading.show()
       clienteService.buscarTodos()
@@ -70,11 +77,13 @@ export default {
           })
         })
     },
+
     showModalAssociacaoProdutoCliente (cliente) {
       this.$root.modal.associacaoProdutoCliente.show(cliente)
-        .then(callback => {
-          debugger
-          console.log(callback)
+        .then(clienteCallback => {
+          if (clienteCallback) {
+            this.atualizarClienteListado(clienteCallback)
+          }
           this.$root.modal.associacaoProdutoCliente.hide()
         })
     }

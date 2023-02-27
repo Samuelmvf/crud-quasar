@@ -1,25 +1,38 @@
 <template>
-  <q-dialog ref="refModal">
+  <q-dialog ref="refModal" persistent>
     <q-card class="box-size q-ma-lg bg-white text-center">
       <div class="q-my-md">
-        <h3 class="text-primary q-ma-none non-selectable">Samuel Maia</h3>
+        <h3 class="text-primary q-ma-none non-selectable">{{ nomeClienteTratado }}</h3>
         <span class="text-subtitle1 text-accent q-mb-md non-selectable">GESTÃO DE PRODUTOS</span>
       </div>
       <q-separator/>
       <div class="row q-ma-md">
         <q-select class="col-8" dense v-model="produtosSelecionados"
-          :options="produtos" label="Associar produto(s)" multiple
+          :options="produtosTratados" label="Associar produto(s)" multiple
           option-label="nome"
-          />
+        >
+          <template v-slot:no-option>
+            <q-item>
+              <q-item-section class="text-italic text-grey">
+                Nenhum produto disponível
+              </q-item-section>
+            </q-item>
+          </template>
+        </q-select>
         <div class="col-4 q-px-md q-py-sm">
+          <!-- TODO Implementar botão apenas com icone para visão de mobile -->
           <q-btn class="fit" dense color="green-8" label="Vincular"
-            @click="actionVincularProduto"
+            :disable="!produtosSelecionados.length"
+            @click="actionVincularProdutos"
           />
         </div>
       </div>
       <q-scroll-area v-if="cliente.produtos.length" class="container-produtos-vinculados q-my-sm q-mx-md">
-        <q-list separator>
-          <q-item v-for="produto in cliente.produtos" :key="produto.id">
+        <div class="q-py-xs">
+          <span class="text-subtitle1 text-accent q-mb-md non-selectable">Produtos associados</span>
+        </div>
+        <q-list>
+          <q-item clickable class="cursor-inherit" v-for="produto in cliente.produtos" :key="produto.id">
             <div class="row full-width items-center">
               <span class="text-body2">
                 {{ produto.nome }}
@@ -33,7 +46,7 @@
       </div>
       <q-separator/>
       <div style="height: 68px">
-        <q-btn color="red" flat label="Fechar" class="q-my-md" @click="hide"/>
+        <q-btn color="red" flat label="Fechar" class="q-my-md" @click="actionFechar"/>
       </div>
     </q-card>
   </q-dialog>
@@ -41,6 +54,8 @@
   
 <script>
 import { extend } from 'quasar'
+
+import clienteService from 'src/services/ClienteService'
 import produtoService from 'src/services/ProdutoService'
 
 export default {
@@ -50,6 +65,7 @@ export default {
     return {
       resolve: null,
       cliente: {
+        nome: '',
         produtos: []
       },
       produtosSelecionados: [],
@@ -58,18 +74,33 @@ export default {
   },
 
   computed: {
+    nomeClienteTratado () {
+      return this.cliente.nome.split(' ').slice(0, 2).join(' ')
+    },
     produtosTratados () {
       return this.produtos.filter(produto => produto.ativo
         && !this.cliente.produtos.find(produtoCliente => produtoCliente.id === produto.id)
-      ).map(produto => {
-        return { label: produto.nome, value: produto.id }  
-      })
+      )
     }
   },
 
   methods: {
-    actionVincularProduto () {
-      console.log('vinculou', this.produtosSelecionados)
+    actionFechar () {
+      this.resolve(this.cliente)
+    },
+
+    actionVincularProdutos () {
+      const produtosASeremVinculados = this.produtosSelecionados.map(produtoSelecionado => {
+        return this.produtos.find(produto => produto.id === produtoSelecionado.id)
+      })
+
+      const produtosAssociados = [
+        ...this.cliente.produtos,
+        ...produtosASeremVinculados
+      ]
+      
+      const clienteTratado = this.getClienteTratado(produtosAssociados)
+      this.salvarCliente(clienteTratado)
     },
 
     buscarProdutos () {
@@ -88,22 +119,52 @@ export default {
         })
     },
 
+    limparCampos () {
+      this.produtosSelecionados = []
+    },
+
+    getClienteTratado (produtosAssociados) {
+      const clientePayload = extend(true, {}, this.cliente)
+      clientePayload.produtos = produtosAssociados
+      return clientePayload
+    },
+
     hide () {
       this.$refs.refModal.hide()
     },
 
-    show (cliente) {
-      this.$refs.refModal.show()
-      this.cliente = extend(true, {}, cliente)
+    salvarCliente (cliente) {
+      this.$q.loading.show()
 
+      clienteService.atualizar(cliente)
+        .then(() => {
+          this.$q.loading.hide()
+          this.$q.notify({
+            type: 'positive',
+            message: 'Produtos associados ao cliente com sucesso.'
+          })
+          this.limparCampos()
+          
+          this.cliente.produtos = cliente.produtos
+        })
+        .catch(() => {
+          this.$q.loading.hide()
+          this.$q.notify({
+            type: 'negative',
+            message: 'Falha ao associar produtos ao cliente. Tente novamente mais tarde.'
+          })
+        })
+    },
+
+    show (cliente) {
+      this.buscarProdutos()
+      this.cliente = extend(true, {}, cliente)
+      
+      this.$refs.refModal.show()
       return new Promise(resolve => {
         this.resolve = resolve
       })
     },
-  },
-
-  mounted () {
-    this.buscarProdutos()
   }
 }
 </script>
@@ -111,6 +172,6 @@ export default {
 .container-produtos-vinculados
   height: calc(55vh - 180px - 88px)
   border: solid 1px $grey-4
-  min-height: 80px
+  min-height: 100px
 
 </style>
