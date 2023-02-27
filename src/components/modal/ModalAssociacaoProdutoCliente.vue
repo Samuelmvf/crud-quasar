@@ -32,7 +32,7 @@
           </q-btn>
         </div>
       </div>
-      <q-scroll-area v-if="cliente.produtos.length" class="container-produtos-vinculados q-my-sm q-mx-md">
+      <q-scroll-area v-if="cliente.produtos.length" class="container-produtos-associados q-my-sm q-mx-md">
         <div class="q-py-xs">
           <span class="text-subtitle1 text-accent q-mb-md non-selectable">Produtos associados</span>
         </div>
@@ -46,8 +46,8 @@
           </q-item>
         </q-list>
       </q-scroll-area>
-      <div v-else class="container-produtos-vinculados q-my-sm q-mx-md flex items-center justify-center text-accent">
-        <span class="non-selectable">Nenhum produto vinculado</span>
+      <div v-else class="container-produtos-associados q-my-sm q-mx-md flex items-center justify-center text-accent">
+        <span class="non-selectable">Nenhum produto associado</span>
       </div>
       <q-separator/>
       <div style="height: 68px">
@@ -96,13 +96,13 @@ export default {
     },
 
     actionVincularProdutos () {
-      const produtosASeremVinculados = this.produtosSelecionados.map(produtoSelecionado => {
+      const produtosASeremAssociados = this.produtosSelecionados.map(produtoSelecionado => {
         return this.produtos.find(produto => produto.id === produtoSelecionado.id)
       })
 
       const produtosAssociados = [
         ...this.cliente.produtos,
-        ...produtosASeremVinculados
+        ...produtosASeremAssociados
       ]
       
       const clienteTratado = this.getClienteTratado(produtosAssociados)
@@ -174,7 +174,7 @@ export default {
 }
 </script>
 <style lang="sass" scoped>
-.container-produtos-vinculados
+.container-produtos-associados
   height: calc(55vh - 180px - 88px)
   border: solid 1px $grey-4
   min-height: 100px
