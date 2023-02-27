@@ -36,7 +36,9 @@ export default {
   },
   methods: {
     goTo () {
-      this.$router.push(this.path)
+      if (this.$route.path !== this.path) {
+        this.$router.push(this.path)
+      }
     }
   }
 }
