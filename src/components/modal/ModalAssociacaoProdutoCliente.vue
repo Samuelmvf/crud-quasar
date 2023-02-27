@@ -19,12 +19,17 @@
             </q-item>
           </template>
         </q-select>
-        <div class="col-4 q-px-md q-py-sm">
+        <div class="col-4 q-pl-sm q-py-sm">
           <!-- TODO Implementar botão apenas com icone para visão de mobile -->
-          <q-btn class="fit" dense color="green-8" label="Vincular"
+          <q-btn class="fit" dense color="green-8"
             :disable="!produtosSelecionados.length"
             @click="actionVincularProdutos"
-          />
+          >
+            <template v-slot:default>
+              <q-icon v-if="$q.screen.lt.sm" name="mdi-plus" />
+              <span v-else>Vincular</span>
+            </template>
+          </q-btn>
         </div>
       </div>
       <q-scroll-area v-if="cliente.produtos.length" class="container-produtos-vinculados q-my-sm q-mx-md">
