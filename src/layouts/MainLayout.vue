@@ -3,10 +3,11 @@
     <q-header elevated class="primary-gradient">
       <q-toolbar>
         <div class="row full-width justify-between">
-          <div class="img-container q-my-sm cursor-pointer" @click="voltarParaPaginaPrincipal">
-            <q-img src="https://datastone.com.br/wp-content/uploads/2018/03/data-stone.png"></q-img>
+          <div class="flex q-my-sm cursor-pointer text-primary items-center" @click="voltarParaPaginaPrincipal">
+            <q-img class="logo-header" src="../../public/app-logo-48.svg" />
+            <span v-if="$q.platform.is.desktop || $q.screen.gt.xs" class="text-h4 q-pl-md non-selectable">SAMUELMVF</span>
           </div>
-          <div v-if="$q.screen.lt.md" class="flex items-center">
+          <div v-if="$q.screen.lt.sm" class="flex items-center">
             <q-btn
               color="primary"
               flat
@@ -139,12 +140,8 @@ export default {
 </script>
 
 <style scoped lang="sass">
-.img-container
-  width: 284px
+.logo-header
+  width: 48px
   height: 48px
-  
-  @media (max-width: 350px)
-    width: 214px
-    height: 36px
 
 </style>
