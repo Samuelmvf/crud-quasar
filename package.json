@@ -2,7 +2,7 @@
   "name": "crud-quasar",
   "version": "1.0.0",
   "description": "Projeto para demonstrar habilidades em Vue.JS utilizando o Quasar Framework.",
-  "productName": "CRUD Example",
+  "productName": "CRUD Quasar",
   "author": "Samuel Maia",
   "private": true,
   "scripts": {
