@@ -67,12 +67,14 @@
     </q-page-container>
 
     <modal-associacao-produto-cliente ref="refModalAssociacaoProdutoCliente"></modal-associacao-produto-cliente>
+    <modal-confirmacao ref="refModalConfirmacao"></modal-confirmacao>
   </q-layout>
 </template>
 
 <script>
 import ItemMenu from 'src/components/ItemMenu.vue'
 import ModalAssociacaoProdutoCliente from 'src/components/modal/ModalAssociacaoProdutoCliente.vue'
+import ModalConfirmacao from 'src/components/modal/ModalConfirmacao.vue'
 
 const blocosMenu = [
   {
@@ -111,7 +113,8 @@ export default {
   name: 'MainLayout',
   components: {
     ItemMenu,
-    ModalAssociacaoProdutoCliente
+    ModalAssociacaoProdutoCliente,
+    ModalConfirmacao
   },
   data () {
     return {
@@ -130,6 +133,7 @@ export default {
     referenciarModais () {
       this.$root.modal = {}
       this.$root.modal.associacaoProdutoCliente = this.$refs.refModalAssociacaoProdutoCliente
+      this.$root.modal.confirmacao = this.$refs.refModalConfirmacao
     },
 
     voltarParaPaginaPrincipal () {

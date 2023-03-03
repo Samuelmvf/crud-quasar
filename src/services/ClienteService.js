@@ -18,9 +18,14 @@ const buscarTodos = () => {
   return mirageApi.get(BASE_PATH)
 }
 
+const deletar = (id) => {
+  return mirageApi.delete(`${BASE_PATH}/${id}`)
+}
+
 export default {
   criar,
   atualizar,
   buscarPorId,
-  buscarTodos
+  buscarTodos,
+  deletar
 }
