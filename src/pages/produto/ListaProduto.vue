@@ -56,13 +56,13 @@ export default {
   methods: {
     actionDeletar ({ nome, id}) {
       const detalhesModal = {
-        descricao: `Deseja realmente deletar o produto "${ nome }" ?`,
+        descricao: this.$t('pages.produto.lista.acao.deletar.modal.confirmacao.descricao', { nome }),
         confirmarAcao: {
-          label: 'Deletar',
+          label: this.$t('pages.produto.lista.acao.deletar.modal.confirmacao.labelConfirmarAcao'),
           color: 'red-8'
         },
         cancelarAcao: {
-          label: 'Cancelar',
+          label: this.$t('pages.produto.lista.acao.deletar.modal.confirmacao.labelCancelarAcao'),
           color: 'grey-8'
         }
       }
@@ -96,7 +96,7 @@ export default {
           this.$q.loading.hide()
           this.$q.notify({
             type: 'negative',
-            message: 'Falha ao carregar produtos. Tente novamente mais tarde.'
+            message: this.$t('pages.produto.lista.acao.buscar.notificacao.erro')
           })
         })
     },
@@ -108,14 +108,14 @@ export default {
           this.$q.loading.hide()
           this.$q.notify({
             type: 'positive',
-            message: 'Produto deletado com sucesso.'
+            message: this.$t('pages.produto.lista.acao.deletar.notificacao.sucesso')
           })
         })
         .catch(() => {
           this.$q.loading.hide()
           this.$q.notify({
             type: 'negative',
-            message: 'Falha ao deletar produto. Tente novamente mais tarde.'
+            message: this.$t('pages.produto.lista.acao.deletar.notificacao.erro')
           })
         })
     }

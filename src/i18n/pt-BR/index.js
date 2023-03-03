@@ -205,5 +205,33 @@ export default {
     }
   },
   components: {
+    modal: {
+      associacaoProdutoCliente: {
+        titulo: 'GESTÃO DE PRODUTOS',
+        form: {
+          input: {
+            associarProduto: {
+              label: 'Associar produto(s)'
+            }
+          },
+          semDados: 'Nenhum produto disponível'
+        },
+        button: {
+          vincular: 'Vincular',
+          fechar: 'Fechar'
+        },
+        tituloProdutosAssociados: 'Produtos associados',
+        semDadosAssociados: 'Nenhum produto associado',
+        acoes: {
+          buscarProdutos: {
+            erro: 'Falha ao carregar produtos. Tente novamente mais tarde.'
+          },
+          salvarCliente: {
+            sucesso: 'Produto(s) associado(s) ao cliente com sucesso.',
+            erro: 'Falha ao associar produto(s) ao cliente. Tente novamente mais tarde.'
+          }
+        }
+      }
+    }
   }
 }
