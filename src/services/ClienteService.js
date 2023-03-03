@@ -1,21 +1,21 @@
-import { api } from "src/boot/axios"
+import { mirageApi } from "src/boot/axios"
 
-const BASE_PATH = '/clientes'
+const BASE_PATH = '/cliente'
 
 const criar = (cliente) => {
-  return api.post(BASE_PATH, cliente)
+  return mirageApi.post(BASE_PATH, cliente)
 }
 
 const atualizar = (cliente) => {
-  return api.put(`${BASE_PATH}/${cliente.id}`, cliente)
+  return mirageApi.put(`${BASE_PATH}/${cliente.id}`, cliente)
 }
 
 const buscarPorId = (id) => {
-  return api.get(`${BASE_PATH}/${id}`)
+  return mirageApi.get(`${BASE_PATH}/${id}`)
 }
 
 const buscarTodos = () => {
-  return api.get(BASE_PATH)
+  return mirageApi.get(BASE_PATH)
 }
 
 export default {
