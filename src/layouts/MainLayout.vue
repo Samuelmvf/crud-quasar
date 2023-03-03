@@ -73,8 +73,8 @@
 
 <script>
 import ItemMenu from 'src/components/ItemMenu.vue'
-import ModalAssociacaoProdutoCliente from 'src/components/modal/ModalAssociacaoProdutoCliente.vue'
-import ModalConfirmacao from 'src/components/modal/ModalConfirmacao.vue'
+import ModalAssociacaoProdutoCliente from 'src/components/modal/cliente/ModalAssociacaoProdutoCliente.vue'
+import ModalConfirmacao from 'src/components/modal/comum/ModalConfirmacao.vue'
 
 const blocosMenu = [
   {

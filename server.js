@@ -24,10 +24,10 @@ createServer({
         },
         {
           id: "2",
-          nome: 'Ana Beatriz',
+          nome: 'Lorem Ipsum',
           documento: '999999',
           telefone: '31999998888',
-          email: 'anabeatriz@hotmail.com',
+          email: 'loremipsum@loremipsum.com.br',
           ativo: true,
           produtos: []
         }
