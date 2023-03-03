@@ -5,7 +5,6 @@ O projeto também tem como objetivo principal demonstrar meus conhecimentos util
 
 ```bash 
 TODO:
-- Exclusão de clientes e produtos
 - Dicionário I18N
 - Testes unitários
 ```
@@ -40,36 +39,36 @@ Página inicial do projeto
 ##### CadastroCliente
 Página de cadastro de cliente
 ```bash
-{ path: 'cliente/criar', component: () => import('pages/CadastroCliente.vue') },
+{ path: 'cliente/criar', component: () => import('pages/cliente/CadastroCliente.vue') },
 ```
 
 Visão de alteração de cliente
 ```bash
-{ path: 'cliente/:id', component: () => import('pages/CadastroCliente.vue') },
+{ path: 'cliente/:id', component: () => import('pages/cliente/CadastroCliente.vue') },
 ```
 
 ##### CadastroProduto
 Página de cadastro de produto
 ```bash
-{ path: 'produto/criar', component: () => import('pages/CadastroProduto.vue') },
+{ path: 'produto/criar', component: () => import('pages/produto/CadastroProduto.vue') },
 ```
 
 Visão de alteração de produto
 ```bash
-{ path: 'produto/:id', component: () => import('pages/CadastroProduto.vue') }
+{ path: 'produto/:id', component: () => import('pages/produto/CadastroProduto.vue') }
 ```
 
                         
 ##### ListaCliente
 Listagem de clientes
 ```bash
-{ path: 'cliente', component: () => import('pages/ListaCliente.vue') },
+{ path: 'cliente', component: () => import('pages/cliente/ListaCliente.vue') },
 ```
 
 ##### ListaProduto
 Listagem de produtos
 ```bash
-{ path: 'produto', component: () => import('pages/ListaProduto.vue') },
+{ path: 'produto', component: () => import('pages/produto/ListaProduto.vue') },
 ```
 
 #### src/components
@@ -77,10 +76,15 @@ Listagem de produtos
 ##### ItemMenu
   Baseando no componente QItem do Quasar, foi realizada uma adaptação pra atender o interesse de utilização de um item no menu principal da aplicação nas visões de Desktop/Mobile.
 
-##### ModalAssociadoProdutoCliente
+##### modal/
+
+###### cliente/ModalAssociadoProdutoCliente
   Optei por criar um modal para realizar a associação de produtos aos clientes para que o contexto de associação partisse da listagem do cliente, dando o sentido de execução de uma funcionalidade presente na página de listagem e mantendo o contexto de estar em um local de alterações no cliente.
 
   Realizei a importação do modal no MainLayout, dessa forma criei um acesso global para o modal com objetivo de facilitar a utilização da funcionalidade de associação produto/cliente uma vez que vier a existir a necessidade de realizar esta associação de outro ponto do sistema.
+
+###### comum/ModalConfirmacao
+  Modal para confirmação de ação genêrica
 
 #### src/services
 Camada para melhor organização e prover facilidade em possíveis manutenção futuras nos serviços e suas chamadas serviços.
