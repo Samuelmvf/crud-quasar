@@ -1,7 +1,7 @@
-import enUS from './en-US'
-import ptBR from './pt-BR'
+import en from './en'
+import pt from './pt'
 
 export default {
-  'en-US': enUS,
-  'pt-BR': ptBR
+  en,
+  pt
 }

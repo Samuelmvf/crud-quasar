@@ -1,13 +1,17 @@
 <template>
   <q-layout view="lHh Lpr lFf">
-    <q-header elevated class="primary-gradient">
+    <q-header  elevated class="primary-gradient">
       <q-toolbar>
         <div class="row full-width justify-between">
-          <div class="flex q-my-sm cursor-pointer text-primary items-center" @click="voltarParaPaginaPrincipal">
+          <div class="flex q-my-sm cursor-pointer text-primary items-center" @click="setarTraducao">
             <q-img class="logo-header" src="../../public/app-logo-48.svg" />
             <span v-if="$q.platform.is.desktop || $q.screen.gt.xs" class="text-h4 q-pl-md non-selectable">SAMUELMVF</span>
           </div>
           <div v-if="$q.screen.lt.sm" class="flex items-center">
+            <div>
+              <q-icon class="cursor-pointer" size="22px" name="img:estados-unidos.png" @click="$root.$i18n.locale = 'en'"/>
+              <q-icon class="cursor-pointer" size="24px" name="img:brasil.png" @click="$root.$i18n.locale = 'pt'" />
+            </div>
             <q-btn
               color="primary"
               flat
@@ -19,6 +23,10 @@
             />
           </div>
           <div v-else class="flex items-center">
+            <div>
+              <q-icon class="cursor-pointer" size="22px" name="img:estados-unidos.png" @click="$root.$i18n.locale = 'en'"/>
+              <q-icon class="cursor-pointer" size="24px" name="img:brasil.png" @click="$root.$i18n.locale = 'pt'"/>
+            </div>
             <q-btn v-for="bloco in blocosMenu" :key="bloco.titulo" flat color="primary" :label="bloco.titulo" class="text-bold">
               <q-menu>
                 <q-list class="bg-accent text-white" style="min-width: 100px">
@@ -101,6 +109,9 @@ export default {
   },
 
   methods: {
+    setarTraducao () {
+    },
+
     getBlocosMenu () {
       return [
         {
@@ -144,6 +155,12 @@ export default {
 
     voltarParaPaginaPrincipal () {
       this.$router.push('/')
+    }
+  },
+
+  watch: {
+    '$root.$i18n.locale' () {
+      this.blocosMenu = this.getBlocosMenu()
     }
   }
 }
