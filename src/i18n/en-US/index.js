@@ -1,7 +1,29 @@
-// This is just an example,
-// so you can safely delete all default props below
-
 export default {
-  failed: 'Action failed',
-  success: 'Action was successful'
+  pages: {
+    cliente: {
+      cadastro: {
+      },
+      lista: {
+        titulo: 'CLIENTES',
+        tooltip: {
+          editar: 'Editar cliente',
+          gerenciarProdutos: 'Gerenciar produtos associados',
+          deletar: 'Deletar'
+        },
+        semDados: 'Nenhum cliente cadastrado',
+        acao: {
+          fechar: 'Fechar'
+        }
+      }
+    },
+    produto: {
+      cadastro: {
+      },
+      lista: {
+
+      }
+    }
+  },
+  components: {
+  }
 }
