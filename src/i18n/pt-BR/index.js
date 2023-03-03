@@ -46,7 +46,39 @@ export default {
       cadastro: {
       },
       lista: {
-
+        titulo: 'PRODUTO',
+        button: {
+          fechar: {
+            label: 'Fechar'
+          },
+          editar: {
+            tooltip: 'Editar produto'
+          },
+          deletar: {
+            tooltip: 'Deletar'
+          }
+        },
+        semDados: 'Nenhum produto cadastrado',
+        acao: {
+          deletar: {
+            modal: {
+              confirmacao: {
+                descricao: 'Deseja realmente deletar o produto "{nome}" ?',
+                labelConfirmarAcao: 'Deletar',
+                labelCancelarAcao: 'Cancelar',
+              }
+            },
+            notificacao: {
+              sucesso: 'Produto deletado com sucesso.',
+              erro: 'Falha ao deletar produto. Tente novamente mais tarde.'
+            }
+          },
+          buscar: {
+            notificacao: {
+              erro: 'Falha ao carregar produtos. Tente novamente mais tarde.'
+            }
+          }
+        }
       }
     }
   },

@@ -1,7 +1,7 @@
 <template>
   <q-page class="flex flex-center bg-secondary">
     <q-card class="q-ma-lg bg-white text-center box-size">
-      <h3 class="text-primary q-my-md non-selectable">PRODUTOS</h3>
+      <h3 class="text-primary q-my-md non-selectable">{{ $t('pages.produto.lista.titulo') }}</h3>
       <q-separator/>
       <q-scroll-area v-if="produtos.length" style="height: calc(55vh - 150px)" class="q-py-sm q-mx-md">
         <q-list separator>
@@ -15,14 +15,14 @@
                   @click="actionEditar(produto.id)"
                 >
                   <q-tooltip>
-                    <span class="text-body2">Editar produto</span>
+                    <span class="text-body2">{{ $t('pages.produto.lista.button.editar.tooltip') }}</span>
                   </q-tooltip>
                 </q-btn>
                 <q-btn dense round flat color="red-8" icon="mdi-delete"
                   @click="actionDeletar(produto)"
                 >
                   <q-tooltip>
-                    <span class="text-body2">Deletar</span>
+                    <span class="text-body2">{{ $t('pages.produto.lista.button.deletar.tooltip') }}</span>
                   </q-tooltip>
                 </q-btn>
               </div>
@@ -31,11 +31,11 @@
         </q-list>
       </q-scroll-area>
       <div v-else class="flex items-center justify-center" style="height: calc(55vh - 150px)">
-        <span class="non-selectable">Nenhum produto cadastrado</span>
+        <span class="non-selectable">{{ $t('pages.produto.lista.semDados') }}</span>
       </div>
       <q-separator/>
       <div style="height: 68px">
-        <q-btn color="red" flat label="Fechar" class="q-my-md" @click="actionFechar"/>
+        <q-btn color="red" flat :label="$t('pages.cliente.lista.button.fechar.label')" class="q-my-md" @click="actionFechar"/>
       </div>
     </q-card>
   </q-page>
