@@ -1,6 +1,6 @@
 {
   "name": "crud-quasar",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Projeto para demonstrar habilidades em Vue.JS utilizando o Quasar Framework.",
   "productName": "CRUD Quasar",
   "author": "Samuel Maia",
@@ -40,7 +40,7 @@
     "last 5 Opera versions"
   ],
   "engines": {
-    "node": "16.19.1",
+    "node": "<= 16.19.1",
     "npm": ">= 6.13.4",
     "yarn": ">= 1.21.1"
   }
