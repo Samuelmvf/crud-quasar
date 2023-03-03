@@ -46,16 +46,16 @@ createServer({
     this.namespace = 'api'
 
     // CLIENTES 
-    this.get('/clientes', () => {
+    this.get('/cliente', () => {
       return this.schema.all('cliente')
     }, { timing: TIMEOUT_GET_MS});
 
-    this.get("/clientes/:id", (schema, request) => {
+    this.get("/cliente/:id", (schema, request) => {
       const id = request.params.id
       return schema.find('cliente', id)
     })
 
-    this.post('/clientes', (schema, request) => {
+    this.post('/cliente', (schema, request) => {
       const cliente = JSON.parse(request.requestBody)
 
       if (!cliente.hasOwnProperty('produtos')) {
@@ -64,7 +64,7 @@ createServer({
       return schema.create('cliente', cliente);
     }, { timing: TIMEOUT_POST_PUT_MS})
 
-    this.put('/clientes/:id', (schema, request) => {
+    this.put('/cliente/:id', (schema, request) => {
       const requestBody = JSON.parse(request.requestBody)
       const id = request.params.id
       const cliente = schema.find('cliente', id)
@@ -73,21 +73,21 @@ createServer({
 
 
     // PRODUTOS
-    this.get('/produtos', () => {
+    this.get('/produto', () => {
       return this.schema.all('produto')
     }, { timing: TIMEOUT_GET_MS})
 
-    this.get("/produtos/:id", (schema, request) => {
+    this.get("/produto/:id", (schema, request) => {
       const id = request.params.id
       return schema.find('produto', id)
     })
     
-    this.post('/produtos', (schema, request) => {
+    this.post('/produto', (schema, request) => {
       const produto = JSON.parse(request.requestBody)
       return schema.create('produto', produto);
     }, { timing: TIMEOUT_POST_PUT_MS})
     
-    this.put('/produtos/:id', (schema, request) => {
+    this.put('/produto/:id', (schema, request) => {
       const requestBody = JSON.parse(request.requestBody)
       const id = request.params.id
       const produto = schema.find('produto', id)
