@@ -76,52 +76,22 @@ import ItemMenu from 'src/components/ItemMenu.vue'
 import ModalAssociacaoProdutoCliente from 'src/components/modal/cliente/ModalAssociacaoProdutoCliente.vue'
 import ModalConfirmacao from 'src/components/modal/comum/ModalConfirmacao.vue'
 
-const blocosMenu = [
-  {
-    titulo: 'Gestão de clientes',
-    acoes: [
-      {
-        nome: 'Criar cliente',
-        icon: 'mdi-account-plus',
-        path: '/cliente/criar'
-      },
-      {
-        nome: 'Listar clientes',
-        icon: 'mdi-text-box-outline',
-        path: '/cliente'
-      }
-    ]
-  },
-  {
-    titulo: 'Gestão de produtos',
-    acoes: [
-      {
-        nome: 'Criar produto',
-        icon: 'mdi-archive',
-        path: '/produto/criar'
-      },
-      {
-        nome: 'Listar produtos',
-        icon: 'mdi-text-box-outline',
-        path: '/produto'
-      }
-    ]
-  }
-]
-
 export default {
   name: 'MainLayout',
+
   components: {
     ItemMenu,
     ModalAssociacaoProdutoCliente,
     ModalConfirmacao
   },
+
   data () {
     return {
       showMenuLateralDireito: false,
-      blocosMenu
+      blocosMenu: this.getBlocosMenu()
     }
   },
+
   mounted () {
     this.referenciarModais()
 
@@ -129,7 +99,43 @@ export default {
       this.showMenuLateralDireito = false
     })
   },
+
   methods: {
+    getBlocosMenu () {
+      return [
+        {
+          titulo: this.$t('layouts.main.menu.cliente.titulo'),
+          acoes: [
+            {
+              nome: this.$t('layouts.main.menu.cliente.acoes.criar'),
+              icon: 'mdi-account-plus',
+              path: '/cliente/criar'
+            },
+            {
+              nome: this.$t('layouts.main.menu.cliente.acoes.listar'),
+              icon: 'mdi-text-box-outline',
+              path: '/cliente'
+            }
+          ]
+        },
+        {
+          titulo: this.$t('layouts.main.menu.produto.titulo'),
+          acoes: [
+            {
+              nome: this.$t('layouts.main.menu.produto.acoes.criar'),
+              icon: 'mdi-archive',
+              path: '/produto/criar'
+            },
+            {
+              nome: this.$t('layouts.main.menu.produto.acoes.listar'),
+              icon: 'mdi-text-box-outline',
+              path: '/produto'
+            }
+          ]
+        }
+      ]
+    },
+
     referenciarModais () {
       this.$root.modal = {}
       this.$root.modal.associacaoProdutoCliente = this.$refs.refModalAssociacaoProdutoCliente

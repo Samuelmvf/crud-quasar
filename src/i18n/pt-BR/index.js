@@ -1,4 +1,24 @@
 export default {
+  layouts: {
+    main: {
+      menu: {
+        cliente: {
+          titulo: 'Gestão de clientes',
+          acoes: {
+            criar: 'Criar cliente',
+            listar: 'Listar clientes'
+          }
+        },
+        produto: {
+          titulo: 'Gestão de produtos',
+          acoes: {
+            criar: 'Criar produto',
+            listar: 'Listar produtos'
+          }
+        }
+      }
+    }
+  },
   pages: {
     cliente: {
       cadastro: {
