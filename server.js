@@ -97,5 +97,10 @@ createServer({
       const produto = schema.find('produto', id)
       return produto.update(requestBody)
     }, { timing: TIMEOUT_POST_PUT_DELETE_MS})
+
+    this.delete('/produto/:id', (schema, request) => {
+      const id = request.params.id
+      return schema.find('produto', id).destroy()
+    }, { timing: TIMEOUT_POST_PUT_DELETE_MS})
   }
 })
