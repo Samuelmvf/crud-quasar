@@ -100,14 +100,6 @@ export default {
     }
   },
 
-  mounted () {
-    this.referenciarModais()
-
-    this.$nextTick(() => {
-      this.showMenuLateralDireito = false
-    })
-  },
-
   methods: {
     setarTraducao () {
     },
@@ -156,6 +148,14 @@ export default {
     voltarParaPaginaPrincipal () {
       this.$router.push('/')
     }
+  },
+  
+  mounted () {
+    this.referenciarModais()
+
+    this.$nextTick(() => {
+      this.showMenuLateralDireito = false
+    })
   },
 
   watch: {

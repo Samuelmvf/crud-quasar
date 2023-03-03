@@ -5,7 +5,6 @@ O projeto também tem como objetivo principal demonstrar meus conhecimentos util
 
 ```bash 
 TODO:
-- Dicionário I18N
 - Testes unitários
 ```
 
@@ -30,6 +29,7 @@ Optei pela utilização do Quasar pois é uma framework robusta de VueJS que pos
 No projeto utilizei mais as estruturas de paginas uma vez que os componentes de formulários de cadastro na sua maioria ou total, eu já conseguia através do Quasar, então não houve necessidade de criação de componentes para atender as necessidades do sistema.
 
 Separei o projeto em 5 páginas totais:
+
 ##### Index
 Página inicial do projeto
 ```bash
@@ -73,18 +73,13 @@ Listagem de produtos
 
 #### src/components
 
-##### ItemMenu
-  Baseando no componente QItem do Quasar, foi realizada uma adaptação pra atender o interesse de utilização de um item no menu principal da aplicação nas visões de Desktop/Mobile.
+##### ModalAssociadoProdutoCliente
+Optei por criar um modal para realizar a associação de produtos aos clientes para que o contexto de associação partisse da listagem do cliente, dando o sentido de execução de uma funcionalidade presente na página de listagem e mantendo o contexto de estar em um local de alterações no cliente.
 
-##### modal/
+Realizei a importação do modal no MainLayout, dessa forma criei um acesso global para o modal com objetivo de facilitar a utilização da funcionalidade de associação produto/cliente uma vez que vier a existir a necessidade de realizar esta associação de outro ponto do sistema.
 
-###### cliente/ModalAssociadoProdutoCliente
-  Optei por criar um modal para realizar a associação de produtos aos clientes para que o contexto de associação partisse da listagem do cliente, dando o sentido de execução de uma funcionalidade presente na página de listagem e mantendo o contexto de estar em um local de alterações no cliente.
-
-  Realizei a importação do modal no MainLayout, dessa forma criei um acesso global para o modal com objetivo de facilitar a utilização da funcionalidade de associação produto/cliente uma vez que vier a existir a necessidade de realizar esta associação de outro ponto do sistema.
-
-###### comum/ModalConfirmacao
-  Modal para confirmação de ação genêrica
+###### ModalConfirmacao
+Modal genérico para situações de confirmação
 
 #### src/services
 Camada para melhor organização e prover facilidade em possíveis manutenção futuras nos serviços e suas chamadas serviços.
@@ -137,3 +132,12 @@ export default {
 },
 ```
 Existem outros recursos que normalmente declaro ao inicio do script do arquivo como: Mixins, Components, Provide/Inject, entre outros.
+
+### Git Flow
+
+Durante o processo de criação do projeto foi utilizado o fluxo do Git Flow (com exceção durante alguns ajustes para realização do deploy na Vercel).
+
+### Aplicação publicada
+
+Aplicação disponível para visualização em:
+https://crud-vue-quasar-samuelmvf.vercel.app/
