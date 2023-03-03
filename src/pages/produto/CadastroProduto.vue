@@ -1,7 +1,7 @@
 <template>
   <q-page class="flex flex-center bg-secondary">
     <q-card class="q-ma-lg bg-white text-center" style="width: 600px">
-      <h3 class="text-primary q-my-md non-selectable">{{ isCadastroProduto ? 'CADASTRO DE PRODUTO' : 'EDITAR PRODUTO' }}</h3>
+      <h3 class="text-primary q-my-md non-selectable">{{ isCadastroProduto ? $t('pages.produto.cadastro.titulo.cadastrar') : $t('pages.produto.cadastro.titulo.editar') }}</h3>
       <q-separator/>
       <q-form
         @submit="actionSalvar"
@@ -10,21 +10,21 @@
           <q-input
             dense
             class="col-12" outlined 
-            v-model="produto.nome" label="Nome*"
-            :rules="[val => !!val && val.length > 1 || 'Preencha o nome corretamente']"
+            v-model="produto.nome" :label="$t('pages.produto.cadastro.form.input.nome.label')"
+            :rules="[val => !!val && val.length > 1 || $t('pages.produto.cadastro.form.input.nome.rules')]"
             lazy-rules/>
           <q-toggle
             dense
             v-model="produto.ativo"
             color="green"
-            label="Ativo"
+            :label="$t('pages.produto.cadastro.form.input.ativo.label')"
             left-label
           />
         </div>
         <q-separator/>
         <div class="row q-pa-md">
-          <q-btn color="primary" :label="isCadastroProduto ? 'Cadastrar' : 'Editar'" type="submit"/>
-          <q-btn color="red" flat label="Cancelar" class="q-ml-sm" @click="actionCancelar"/>
+          <q-btn color="primary" :label="isCadastroProduto ? $t('pages.produto.cadastro.button.cadastrar.label') : $t('pages.produto.cadastro.button.editar.label')" type="submit"/>
+          <q-btn color="red" flat :label="$t('pages.produto.cadastro.button.cancelar.label')" class="q-ml-sm" @click="actionCancelar"/>
         </div>
       </q-form>
     </q-card>
@@ -73,7 +73,7 @@ export default {
           this.$q.loading.hide()
           this.$q.notify({
             type: 'positive',
-            message: 'Produto atualizado com sucesso.'
+            message: this.$t('pages.produto.cadastro.acao.atualizar.notificacao.sucesso')
           })
           this.$router.push('/produto')
         })
@@ -81,7 +81,7 @@ export default {
           this.$q.loading.hide()
           this.$q.notify({
             type: 'negative',
-            message: 'Falha ao atualizar produto. Tente novamente mais tarde.'
+            message: this.$t('pages.produto.cadastro.acao.atualizar.notificacao.erro')
           })
         })
     },
@@ -97,7 +97,7 @@ export default {
           this.$q.loading.hide()
           this.$q.notify({
             type: 'negative',
-            message: 'Falha ao buscar produto. Tente novamente mais tarde.'
+            message: this.$t('pages.produto.cadastro.acao.buscarProduto.notificacao.erro')
           })
         })
     },
@@ -109,7 +109,7 @@ export default {
           this.$q.loading.hide()
           this.$q.notify({
             type: 'positive',
-            message: 'Produto cadastrado com sucesso.'
+            message: this.$t('pages.produto.cadastro.acao.cadastrar.notificacao.sucesso')
           })
           this.$router.push('/produto')
         })
@@ -117,7 +117,7 @@ export default {
           this.$q.loading.hide()
           this.$q.notify({
             type: 'negative',
-            message: 'Falha ao cadastrar produto. Tente novamente mais tarde.'
+            message: this.$t('pages.produto.cadastro.acao.cadastrar.notificacao.erro')
           })
         })
     },

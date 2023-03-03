@@ -101,6 +101,51 @@ export default {
     },
     produto: {
       cadastro: {
+        titulo: {
+          cadastrar: 'CADASTRO DE PRODUTO',
+          editar: 'EDITAR PRODUTO'
+        },
+        form: {
+          input: {
+            ativo: {
+              label: 'Ativo',
+            },
+            nome: {
+              label: 'Nome*',
+              rules: 'Preencha o nome corretamente'
+            }
+          }
+        },
+        button: {
+          editar: {
+            label: 'Editar'
+          },
+          cadastrar: {
+            label: 'Cadastrar'
+          },
+          cancelar: {
+            label: 'Cancelar'
+          }
+        },
+        acao: {
+          atualizar: {
+            notificacao: {
+              sucesso: 'Produto atualizado com sucesso.',
+              erro: 'Falha ao atualizar produto. Tente novamente mais tarde.'
+            }
+          },
+          cadastrar: {
+            notificacao: {
+              sucesso: 'Produto cadastrado com sucesso.',
+              erro: 'Falha ao cadastrar produto. Tente novamente mais tarde.'
+            }
+          },
+          buscarProduto: {
+            notificacao: {
+              erro: 'Falha ao buscar produto. Tente novamente mais tarde.'
+            }
+          }
+        }
       },
       lista: {
         titulo: 'PRODUTO',
