@@ -1,7 +1,7 @@
 <template>
   <q-page class="flex flex-center bg-secondary">
     <q-card class="q-ma-lg bg-white text-center" style="width: 600px">
-      <h3 class="text-primary q-my-md non-selectable">{{ isCadastroCliente ? 'CADASTRO DE CLIENTE' : 'EDITAR CLIENTE' }}</h3>
+      <h3 class="text-primary q-my-md non-selectable">{{ isCadastroCliente ? $t('pages.cliente.cadastro.titulo.cadastrar') : $t('pages.cliente.cadastro.titulo.editar') }}</h3>
       <q-separator/>
       <q-form
         @submit="actionSalvar"
@@ -10,41 +10,41 @@
           <q-input
             dense
             class="col-xs-12 col-sm-12 col-md-6" outlined 
-            v-model="cliente.nome" label="Nome*"
-            :rules="[val => !!val && val.length > 1 || 'Preencha o nome corretamente']"
+            v-model="cliente.nome" :label="$t('pages.cliente.cadastro.form.input.nome.label')"
+            :rules="[val => !!val && val.length > 1 || $t('pages.cliente.cadastro.form.input.nome.rules')]"
             lazy-rules/>
           <q-input
             dense
             class="col-xs-12 col-sm-12 col-md-6" outlined
-            v-model="cliente.documento" label="Documento*"
-            :rules="[val => !!val || 'Preencha o documento corretamente']"
+            v-model="cliente.documento" :label="$t('pages.cliente.cadastro.form.input.documento.label')"
+            :rules="[val => !!val || $t('pages.cliente.cadastro.form.input.documento.rules')]"
             lazy-rules/>
           <q-input
             dense
             class="col-xs-12 col-sm-12 col-md-6" outlined
-            v-model="cliente.telefone" label="Telefone*"
+            v-model="cliente.telefone" :label="$t('pages.cliente.cadastro.form.input.telefone.label')"
             :mask="maskClienteTelefone"
             unmasked-value
-            :rules="[val => !!val && val.length >= 10 || 'Preencha o telefone corretamente']"
+            :rules="[val => !!val && val.length >= 10 || $t('pages.cliente.cadastro.form.input.telefone.rules')]"
             lazy-rules/>
           <q-input
             dense
             class="col-xs-12 col-sm-12 col-md-6" outlined
-            v-model="cliente.email" label="Email*"
-            :rules="[val => validarEmail(val) || 'Preencha o campo email corretamente']"
+            v-model="cliente.email" :label="$t('pages.cliente.cadastro.form.input.email.label')"
+            :rules="[val => validarEmail(val) || $t('pages.cliente.cadastro.form.input.email.rules')]"
             lazy-rules/>
           <q-toggle
             dense
             v-model="cliente.ativo"
             color="green"
-            label="Ativo"
+            :label="$t('pages.cliente.cadastro.form.input.ativo.label')"
             left-label
           />
         </div>
         <q-separator/>
         <div class="row q-pa-md">
-          <q-btn color="primary" :label="isCadastroCliente ? 'Cadastrar' : 'Editar'" type="submit"/>
-          <q-btn color="red" flat label="Cancelar" class="q-ml-sm" @click="actionCancelar"/>
+          <q-btn color="primary" :label="isCadastroCliente ? $t('pages.cliente.cadastro.button.cadastrar.label') : $t('pages.cliente.cadastro.button.editar.label')" type="submit"/>
+          <q-btn color="red" flat :label="$t('pages.cliente.cadastro.button.cancelar.label')" class="q-ml-sm" @click="actionCancelar"/>
         </div>
       </q-form>
     </q-card>
@@ -100,7 +100,7 @@ export default {
           this.$q.loading.hide()
           this.$q.notify({
             type: 'positive',
-            message: 'Cliente atualizado com sucesso.'
+            message: this.$t('pages.cliente.cadastro.acao.atualizar.notificacao.sucesso')
           })
           this.$router.push('/cliente')
         })
@@ -108,7 +108,7 @@ export default {
           this.$q.loading.hide()
           this.$q.notify({
             type: 'negative',
-            message: 'Falha ao atualizar cliente. Tente novamente mais tarde.'
+            message: this.$t('pages.cliente.cadastro.acao.atualizar.notificacao.erro')
           })
         })
     },
@@ -124,7 +124,7 @@ export default {
           this.$q.loading.hide()
           this.$q.notify({
             type: 'negative',
-            message: 'Falha ao buscar cliente. Tente novamente mais tarde.'
+            message: this.$t('pages.cliente.cadastro.acao.buscarCliente.notificacao.erro')
           })
         })
     },
@@ -136,7 +136,7 @@ export default {
           this.$q.loading.hide()
           this.$q.notify({
             type: 'positive',
-            message: 'Cliente cadastrado com sucesso.'
+            message: this.$t('pages.cliente.cadastro.acao.cadastrar.notificacao.sucesso')
           })
           this.$router.push('/cliente')
         })
@@ -144,7 +144,7 @@ export default {
           this.$q.loading.hide()
           this.$q.notify({
             type: 'negative',
-            message: 'Falha ao cadastrar cliente. Tente novamente mais tarde.'
+            message: this.$t('pages.cliente.cadastro.acao.cadastrar.notificacao.erro')
           })
         })
     },

@@ -1,13 +1,17 @@
 <template>
   <q-layout view="lHh Lpr lFf">
-    <q-header elevated class="primary-gradient">
+    <q-header  elevated class="primary-gradient">
       <q-toolbar>
         <div class="row full-width justify-between">
-          <div class="flex q-my-sm cursor-pointer text-primary items-center" @click="voltarParaPaginaPrincipal">
+          <div class="flex q-my-sm cursor-pointer text-primary items-center" @click="setarTraducao">
             <q-img class="logo-header" src="../../public/app-logo-48.svg" />
             <span v-if="$q.platform.is.desktop || $q.screen.gt.xs" class="text-h4 q-pl-md non-selectable">SAMUELMVF</span>
           </div>
           <div v-if="$q.screen.lt.sm" class="flex items-center">
+            <div>
+              <q-icon class="cursor-pointer" size="22px" name="img:estados-unidos.png" @click="$root.$i18n.locale = 'en'"/>
+              <q-icon class="cursor-pointer" size="24px" name="img:brasil.png" @click="$root.$i18n.locale = 'pt'" />
+            </div>
             <q-btn
               color="primary"
               flat
@@ -19,6 +23,10 @@
             />
           </div>
           <div v-else class="flex items-center">
+            <div>
+              <q-icon class="cursor-pointer" size="22px" name="img:estados-unidos.png" @click="$root.$i18n.locale = 'en'"/>
+              <q-icon class="cursor-pointer" size="24px" name="img:brasil.png" @click="$root.$i18n.locale = 'pt'"/>
+            </div>
             <q-btn v-for="bloco in blocosMenu" :key="bloco.titulo" flat color="primary" :label="bloco.titulo" class="text-bold">
               <q-menu>
                 <q-list class="bg-accent text-white" style="min-width: 100px">
@@ -67,58 +75,81 @@
     </q-page-container>
 
     <modal-associacao-produto-cliente ref="refModalAssociacaoProdutoCliente"></modal-associacao-produto-cliente>
+    <modal-confirmacao ref="refModalConfirmacao"></modal-confirmacao>
   </q-layout>
 </template>
 
 <script>
 import ItemMenu from 'src/components/ItemMenu.vue'
-import ModalAssociacaoProdutoCliente from 'src/components/modal/ModalAssociacaoProdutoCliente.vue'
-
-const blocosMenu = [
-  {
-    titulo: 'Gestão de clientes',
-    acoes: [
-      {
-        nome: 'Criar cliente',
-        icon: 'mdi-account-plus',
-        path: '/cliente/criar'
-      },
-      {
-        nome: 'Listar clientes',
-        icon: 'mdi-text-box-outline',
-        path: '/cliente'
-      }
-    ]
-  },
-  {
-    titulo: 'Gestão de produtos',
-    acoes: [
-      {
-        nome: 'Criar produto',
-        icon: 'mdi-archive',
-        path: '/produto/criar'
-      },
-      {
-        nome: 'Listar produtos',
-        icon: 'mdi-text-box-outline',
-        path: '/produto'
-      }
-    ]
-  }
-]
+import ModalAssociacaoProdutoCliente from 'src/components/modal/cliente/ModalAssociacaoProdutoCliente.vue'
+import ModalConfirmacao from 'src/components/modal/comum/ModalConfirmacao.vue'
 
 export default {
   name: 'MainLayout',
+
   components: {
     ItemMenu,
-    ModalAssociacaoProdutoCliente
+    ModalAssociacaoProdutoCliente,
+    ModalConfirmacao
   },
+
   data () {
     return {
       showMenuLateralDireito: false,
-      blocosMenu
+      blocosMenu: this.getBlocosMenu()
     }
   },
+
+  methods: {
+    setarTraducao () {
+    },
+
+    getBlocosMenu () {
+      return [
+        {
+          titulo: this.$t('layouts.main.menu.cliente.titulo'),
+          acoes: [
+            {
+              nome: this.$t('layouts.main.menu.cliente.acoes.criar'),
+              icon: 'mdi-account-plus',
+              path: '/cliente/criar'
+            },
+            {
+              nome: this.$t('layouts.main.menu.cliente.acoes.listar'),
+              icon: 'mdi-text-box-outline',
+              path: '/cliente'
+            }
+          ]
+        },
+        {
+          titulo: this.$t('layouts.main.menu.produto.titulo'),
+          acoes: [
+            {
+              nome: this.$t('layouts.main.menu.produto.acoes.criar'),
+              icon: 'mdi-archive',
+              path: '/produto/criar'
+            },
+            {
+              nome: this.$t('layouts.main.menu.produto.acoes.listar'),
+              icon: 'mdi-text-box-outline',
+              path: '/produto'
+            }
+          ]
+        }
+      ]
+    },
+
+    referenciarModais () {
+      this.$root.modal = {}
+      this.$root.modal.associacaoProdutoCliente = this.$refs.refModalAssociacaoProdutoCliente
+      this.$root.modal.confirmacao = this.$refs.refModalConfirmacao
+    },
+
+    voltarParaPaginaPrincipal () {
+      this.$router.push('/')
+    }
+  },
+  
   mounted () {
     this.referenciarModais()
 
@@ -126,14 +157,10 @@ export default {
       this.showMenuLateralDireito = false
     })
   },
-  methods: {
-    referenciarModais () {
-      this.$root.modal = {}
-      this.$root.modal.associacaoProdutoCliente = this.$refs.refModalAssociacaoProdutoCliente
-    },
 
-    voltarParaPaginaPrincipal () {
-      this.$router.push('/')
+  watch: {
+    '$root.$i18n.locale' () {
+      this.blocosMenu = this.getBlocosMenu()
     }
   }
 }
